@@ -1,0 +1,16 @@
+[
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/inspire.vue",
+    "chunkName": "pages/inspire",
+    "_name": "_07966474"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_00ac76ec"
+  }
+]
