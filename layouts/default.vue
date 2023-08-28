@@ -20,6 +20,7 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
+      <img src="~/static/logo.jpg" alt="" height="45px" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
       <v-btn text to="/" color="deep-orange">
@@ -82,7 +83,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Myclinic",
+      title: "",
     };
   },
 };
