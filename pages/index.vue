@@ -1,83 +1,500 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
+  <div>
+    <v-card elevation="1" class="mt-3">
+      <v-card-title>
+        <b><v-icon>mdi-calendar-month</v-icon> นัดวันนี้</b>
+        <v-spacer />
+        <div class="text-center">
+          <v-btn text color="success" @click="dialog = true">
+            <v-icon>mdi-calendar-plus-outline</v-icon> เพิ่มนัด
+          </v-btn>
+        </div>
+      </v-card-title>
+      <v-divider />
+      <v-card-text>
+        <v-row>
+          <v-col md="2">
+            <v-menu
+              v-model="menu"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date"
+                  label="วันที่"
+                  prepend-inner-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                  outlined
+                  dense
+                  hide-details
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-model="date"
+                color="deep-orange"
+                @input="menu = false"
+              ></v-date-picker>
+            </v-menu>
+          </v-col>
+        </v-row>
+        <br />
+        <v-divider style="border-top: 1px dashed rgba(0, 0, 0, 0.12)" />
+        <v-simple-table fixed-header height="70vh">
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th
+                  style="background-color: #212121"
+                  class="text-center font-weight-bold white--text"
+                >
+                  ลำดับ
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  รหัสลูกค้า
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  ชื่อ-นามสกุล
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  แพทย์
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  สถานะ
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  เวลานัด
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  มาถึง
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  เข้าตรวจ
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  ตรวจเสร็จ
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
+                  หมายเหตุ
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(item, i) in desserts"
+                :key="i"
+                :style="`background-color:${
+                  item.Date_finish ? '#C8E6C9' : item.Date_come ? '#FFAB91' : ''
+                };`"
+              >
+                <td class="text-center">{{ i + 1 }}</td>
+                <td class="text-left">{{ item.ID_Customer }}</td>
+                <td class="text-left">
+                  <v-avatar size="30">
+                    <img
+                      src="https://cdn.vuetifyjs.com/images/john.jpg"
+                      alt="John"
+                    />
+                  </v-avatar>
+                  <span class="pl-3">{{ item.name }}</span>
+                </td>
+                <td class="text-left">{{ item.Doctor_name }}</td>
+                <td class="text-left">{{ item.Status }}</td>
+                <td class="text-left">
+                  {{ DateFormat(item.Date_nut, "HH:mm A") }}
+                </td>
+                <td class="text-left">
+                  <span v-if="item.Date_come">{{
+                    DateFormat(item.Date_come, "HH:mm A")
+                  }}</span>
+                  <v-btn
+                    v-else
+                    elevation="0"
+                    color="info"
+                    small
+                    @click="fn_CustomerCome(item)"
+                  >
+                    มาถึง
+                  </v-btn>
+                </td>
+                <td class="text-left">
+                  <v-btn
+                    v-if="item.Date_come && !item.Date_inspect"
+                    elevation="0"
+                    color="warning"
+                    small
+                    @click="fn_CustomerInspect(item)"
+                  >
+                    เข้าตรวจ
+                  </v-btn>
+                  <span v-else>{{
+                    DateFormat(item.Date_inspect, "HH:mm A")
+                  }}</span>
+                </td>
+                <td class="text-left">
+                  <v-btn
+                    v-if="
+                      item.Date_come && item.Date_inspect && !item.Date_finish
+                    "
+                    elevation="0"
+                    color="success"
+                    small
+                    @click="fn_CustomerFinish(item)"
+                  >
+                    ตรวจเสร็จ
+                  </v-btn>
+                  <span v-else>{{
+                    DateFormat(item.Date_finish, "HH:mm A")
+                  }}</span>
+                </td>
+                <td class="text-left">{{ item.Remark }}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-card-text>
+    </v-card>
+    <v-dialog v-model="dialog" persistent max-width="600px">
       <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+        <v-card-title>
+          <span class="text-h5"
+            ><v-icon>mdi-calendar-plus-outline</v-icon> เพิ่มนัด</span
+          >
         </v-card-title>
         <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
+          <v-row>
+            <v-col md="6" sm="12" cols="12">
+              <v-menu
+                v-model="menuDailog"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                transition="scale-transition"
+                offset-y
+                min-width="auto"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="FormAdd.Date_nut"
+                    label="วันที่"
+                    prepend-inner-icon="mdi-calendar"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                    outlined
+                    dense
+                    hide-details
+                  ></v-text-field>
+                </template>
+                <v-date-picker
+                  v-model="FormAdd.Date_nut"
+                  color="deep-orange"
+                  @input="menuDailog = false"
+                ></v-date-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
+          <v-row class="pb-3">
+            <v-col md="6" sm="12" cols="12">
+              <v-text-field label="เริ่มเวลา" outlined dense hide-details type="time"></v-text-field>
+            </v-col>
+            <v-col md="6" sm="12" cols="12">
+              <v-text-field label="สิ้นสุด" outlined dense hide-details type="time"></v-text-field>
+            </v-col>
+            <v-col md="6" sm="12" cols="12">
+              <v-select  outlined dense hide-details placeholder="-----เลือกแพทย์-----" :items="['-----เลือกแพทย์-----']"></v-select>
+            </v-col>
+            <v-col md="6" sm="12" cols="12">
+              <v-select  outlined dense hide-details placeholder="----- ห้อง -----" :items="['-----เลือกห้อง-----']"></v-select>
+            </v-col>
+            <v-col md="6" sm="12" cols="12">
+              <v-select  outlined dense hide-details placeholder="----- เลือกหมายเหตุ -----" :items="['-----เลือกหมายเหตุ-----']"></v-select>
+            </v-col>
+            <v-col md="12" sm="12" cols="12">
+              <v-textarea  outlined dense hide-details label="หมายเหตุ" rows="3" ></v-textarea>
+            </v-col>
+          </v-row>
+          <v-divider/>
+          <v-row class="pt-3">
+            <v-col md="6" sm="12" cols="12">
+              <v-autocomplete :items="CoustomerOP"  placeholder="ชื่อ หรือ รหัส คนไข้" outlined dense hide-details ></v-autocomplete>
+            </v-col>
+          </v-row>
+          <v-row >
+            <v-col md="6" sm="12" cols="12">
+              <v-text-field label="ชื่อคนไข้" outlined dense hide-details ></v-text-field>
+            </v-col>
+            <v-col md="6" sm="12" cols="12">
+              <v-text-field label="เบอร์โทร" outlined dense hide-details ></v-text-field>
+            </v-col>
+            
+          </v-row>
         </v-card-text>
         <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="dialog = false">
+            Close
+          </v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false">
+            Save
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-col>
-  </v-row>
+    </v-dialog>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
-}
+  name: "IndexPage",
+  data() {
+    return {
+      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
+      menu: false,
+      menuDailog: false,
+      dialog: false,
+      desserts: [
+        {
+          name: "Frozen Yogurt",
+          ID_Customer: 159,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "Ice cream sandwich",
+          ID_Customer: 237,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "Eclair",
+          ID_Customer: 262,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "Cupcake",
+          ID_Customer: 305,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "Gingerbread",
+          ID_Customer: 356,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "Jelly bean",
+          ID_Customer: 375,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "Lollipop",
+          ID_Customer: 392,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "Honeycomb",
+          ID_Customer: 408,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "Donut",
+          ID_Customer: 452,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+        {
+          name: "KitKat",
+          ID_Customer: 518,
+          Doctor_name: "john wick",
+          Status: "",
+          Date_nut: new Date(
+            Date.now() - new Date().getTimezoneOffset() * 60000
+          ),
+          Date_come: "",
+          Date_inspect: "",
+          Date_finish: "",
+          Remark: "",
+        },
+      ],
+      FormAdd: {
+        Date_nut: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+          .toISOString()
+          .substr(0, 10),
+      },
+      CoustomerOP:[
+        {
+          text: "Frozen Yogurt",
+          value: 159,
+          
+        },
+        {
+          text: "Ice cream sandwich",
+          value: 237,
+        
+        },
+        {
+          text: "Eclair",
+          value: 262,
+        
+        },
+        {
+          text: "Cupcake",
+          value: 305,
+         
+        },
+        {
+          text: "Gingerbread",
+          value: 356,
+         
+        },
+        {
+          text: "Jelly bean",
+          value: 375,
+        
+        },
+        {
+          text: "Lollipop",
+          value: 392,
+          
+        },
+        {
+          text: "Honeycomb",
+          value: 408,
+     
+        },
+        {
+          text: "Donut",
+          value: 452,
+        },
+        {
+          text: "KitKat",
+          value: 518,
+        
+        },
+      ]
+    };
+  },
+  methods: {
+    fn_CustomerCome(item) {
+      item.Date_come = new Date(
+        Date.now() - new Date().getTimezoneOffset() * 60000
+      );
+      // alert(item)
+    },
+    fn_CustomerInspect(item) {
+      item.Date_inspect = new Date(
+        Date.now() - new Date().getTimezoneOffset() * 60000
+      );
+      // alert(item)
+    },
+    fn_CustomerFinish(item) {
+      item.Date_finish = new Date(
+        Date.now() - new Date().getTimezoneOffset() * 60000
+      );
+      // alert(item)
+    },
+  },
+};
 </script>
