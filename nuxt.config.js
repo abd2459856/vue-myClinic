@@ -65,5 +65,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+    analyze: {
+      analyzerMode: "static",
+    },
+  },
+  mode: "spa",
+  router: {
+    base: "/myclinic",
+  },
 }
