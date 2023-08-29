@@ -5,6 +5,9 @@
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"
   },
+  "Vmenu": {
+    "description": "Auto imported from components/Vmenu.vue"
+  },
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
   }

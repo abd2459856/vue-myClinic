@@ -1,8 +1,16 @@
+<style scoped>
+::v-deep .costomgray > .v-input__control > .v-input__slot {
+  background-color: white;
+}
+</style>
 <template>
   <div>
     <v-card elevation="1" class="mt-3">
       <v-card-title>
-        <b><v-icon>mdi-calendar-month</v-icon> นัดวันนี้</b>
+        <b><v-icon>mdi-calendar-month</v-icon> นัดวันนี้ &nbsp;</b>
+        <v-chip color="error" label outlined>
+          ทั้งหมด {{ desserts.length }} รายการ
+        </v-chip>
         <v-spacer />
         <div class="text-center">
           <v-btn text color="success" @click="dialog = true">
@@ -12,38 +20,32 @@
       </v-card-title>
       <v-divider />
       <v-card-text>
-        <v-row>
-          <v-col md="2">
-            <v-menu
-              v-model="menu"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              transition="scale-transition"
-              offset-y
-              min-width="auto"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="date"
-                  label="วันที่"
-                  prepend-inner-icon="mdi-calendar"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                  outlined
-                  dense
-                  hide-details
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="date"
-                color="deep-orange"
-                @input="menu = false"
-              ></v-date-picker>
-            </v-menu>
-          </v-col>
-        </v-row>
-        <br />
+        <v-card color="rgb(237 235 215)" elevation="0" class="pa-5 mb-3">
+          <v-row>
+            <v-col md="7">
+              <v-text-field
+                class="costomgray"
+                prepend-inner-icon="mdi-magnify"
+                outlined
+                dense
+                placeholder="รหัสลูกค้า ชื่อ-นามสกุล หรือ แพทย์"
+                hide-details
+              ></v-text-field>
+            </v-col>
+            <v-col md="2">
+              <Vmenu :vdate="dateStart" :label="'ตั้งแต่วันที่'" />
+            </v-col>
+            <v-col md="2">
+              <Vmenu :vdate="dateStart" :label="'ถึงวันที่'" />
+            </v-col>
+            <v-col md="1">
+              <v-btn elevation="0" color="primary">
+                <v-icon>mdi-magnify</v-icon>
+                ค้นหา
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card>
         <v-divider style="border-top: 1px dashed rgba(0, 0, 0, 0.12)" />
         <v-simple-table fixed-header height="70vh">
           <template v-slot:default>
@@ -89,6 +91,12 @@
                   style="background-color: #212121"
                   class="text-left font-weight-bold white--text"
                 >
+                  เลื่อน/ยกเลิก
+                </th>
+                <th
+                  style="background-color: #212121"
+                  class="text-left font-weight-bold white--text"
+                >
                   มาถึง
                 </th>
                 <th
@@ -103,6 +111,7 @@
                 >
                   ตรวจเสร็จ
                 </th>
+
                 <th
                   style="background-color: #212121"
                   class="text-left font-weight-bold white--text"
@@ -116,7 +125,7 @@
                 v-for="(item, i) in desserts"
                 :key="i"
                 :style="`background-color:${
-                  item.Date_finish ? '#C8E6C9' : item.Date_come ? '#FFAB91' : ''
+                  item.Date_finish ? '#E8F5E9' : item.Date_come ? '#FFF3E0' : ''
                 };`"
               >
                 <td class="text-center">{{ i + 1 }}</td>
@@ -134,6 +143,17 @@
                 <td class="text-left">{{ item.Status }}</td>
                 <td class="text-left">
                   {{ DateFormat(item.Date_nut, "HH:mm A") }}
+                </td>
+                <td class="text-left">
+                  <v-btn
+                    elevation="0"
+                    color="error"
+                    small
+                    text
+                    @click="dialogEdit = true"
+                  >
+                    <v-icon>mdi-text-box-edit</v-icon>
+                  </v-btn>
                 </td>
                 <td class="text-left">
                   <span v-if="item.Date_come">{{
@@ -187,7 +207,7 @@
       </v-card-text>
     </v-card>
     <v-dialog v-model="dialog" persistent max-width="600px">
-      <v-card>
+      <v-card >
         <v-card-title>
           <span class="text-h5"
             ><v-icon>mdi-calendar-plus-outline</v-icon> เพิ่มนัด</span
@@ -196,69 +216,94 @@
         <v-card-text>
           <v-row>
             <v-col md="6" sm="12" cols="12">
-              <v-menu
-                v-model="menuDailog"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
-                    v-model="FormAdd.Date_nut"
-                    label="วันที่"
-                    prepend-inner-icon="mdi-calendar"
-                    readonly
-                    v-bind="attrs"
-                    v-on="on"
-                    outlined
-                    dense
-                    hide-details
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="FormAdd.Date_nut"
-                  color="deep-orange"
-                  @input="menuDailog = false"
-                ></v-date-picker>
-              </v-menu>
+              <Vmenu ref="" :vdate="FormAdd.Date_nut" :label="'วันที่'" />
             </v-col>
           </v-row>
           <v-row class="pb-3">
             <v-col md="6" sm="12" cols="12">
-              <v-text-field label="เริ่มเวลา" outlined dense hide-details type="time"></v-text-field>
+              <v-text-field
+                label="เริ่มเวลา"
+                outlined
+                dense
+                hide-details
+                type="time"
+              ></v-text-field>
             </v-col>
             <v-col md="6" sm="12" cols="12">
-              <v-text-field label="สิ้นสุด" outlined dense hide-details type="time"></v-text-field>
+              <v-text-field
+                label="สิ้นสุด"
+                outlined
+                dense
+                hide-details
+                type="time"
+              ></v-text-field>
             </v-col>
             <v-col md="6" sm="12" cols="12">
-              <v-select  outlined dense hide-details placeholder="-----เลือกแพทย์-----" :items="['-----เลือกแพทย์-----']"></v-select>
+              <v-select
+                outlined
+                dense
+                hide-details
+                placeholder="-----เลือกแพทย์-----"
+                :items="['-----เลือกแพทย์-----']"
+              ></v-select>
             </v-col>
             <v-col md="6" sm="12" cols="12">
-              <v-select  outlined dense hide-details placeholder="----- ห้อง -----" :items="['-----เลือกห้อง-----']"></v-select>
+              <v-select
+                outlined
+                dense
+                hide-details
+                placeholder="----- ห้อง -----"
+                :items="['-----เลือกห้อง-----']"
+              ></v-select>
             </v-col>
             <v-col md="6" sm="12" cols="12">
-              <v-select  outlined dense hide-details placeholder="----- เลือกหมายเหตุ -----" :items="['-----เลือกหมายเหตุ-----']"></v-select>
+              <v-select
+                outlined
+                dense
+                hide-details
+                placeholder="----- เลือกหมายเหตุ -----"
+                :items="['-----เลือกหมายเหตุ-----']"
+              ></v-select>
             </v-col>
             <v-col md="12" sm="12" cols="12">
-              <v-textarea  outlined dense hide-details label="หมายเหตุ" rows="3" ></v-textarea>
+              <v-textarea
+                outlined
+                dense
+                hide-details
+                label="หมายเหตุ"
+                rows="3"
+              ></v-textarea>
             </v-col>
           </v-row>
-          <v-divider/>
+          <v-divider />
           <v-row class="pt-3">
             <v-col md="6" sm="12" cols="12">
-              <v-autocomplete :items="CoustomerOP"  placeholder="ชื่อ หรือ รหัส คนไข้" outlined dense hide-details ></v-autocomplete>
+              <v-autocomplete
+                :items="CoustomerOP"
+                placeholder="ชื่อ หรือ รหัส คนไข้"
+                outlined
+                dense
+                hide-details
+              ></v-autocomplete>
             </v-col>
           </v-row>
-          <v-row >
+          <v-row>
             <v-col md="6" sm="12" cols="12">
-              <v-text-field label="ชื่อคนไข้" outlined dense hide-details ></v-text-field>
+              <v-text-field
+                label="ชื่อคนไข้"
+                outlined
+                dense
+                hide-details
+              ></v-text-field>
             </v-col>
             <v-col md="6" sm="12" cols="12">
-              <v-text-field label="เบอร์โทร" outlined dense hide-details ></v-text-field>
+              <v-text-field
+                label="เบอร์โทร"
+                outlined
+                dense
+                hide-details
+              ></v-text-field>
             </v-col>
-            
           </v-row>
         </v-card-text>
         <v-card-actions>
@@ -272,20 +317,119 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="dialogEdit" persistent max-width="600px">
+      <v-card>
+        <v-card-title>
+          <span class="text-h5"
+            ><v-icon>mdi-calendar-plus-outline</v-icon> เลื่อน/ยกเลิก</span
+          >
+        </v-card-title>
+        <v-card-text>
+          <v-row>
+            <v-col md="6" sm="12" cols="12">
+              <v-select
+                outlined
+                dense
+                hide-details
+                label="เลือก"
+                :items="['เลื่อนนัด', 'ยกเลิก']"
+              ></v-select>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col md="6" sm="12" cols="12">
+              <Vmenu ref="" :vdate="FormEdit.Date_nut" :label="'วันที่'" />
+            </v-col>
+          </v-row>
+          <v-row class="pb-3">
+            <v-col md="6" sm="12" cols="12">
+              <v-text-field
+                label="เริ่มเวลา"
+                outlined
+                dense
+                hide-details
+                type="time"
+              ></v-text-field>
+            </v-col>
+            <v-col md="6" sm="12" cols="12">
+              <v-text-field
+                label="สิ้นสุด"
+                outlined
+                dense
+                hide-details
+                type="time"
+              ></v-text-field>
+            </v-col>
+            <!-- <v-col md="6" sm="12" cols="12">
+              <v-select
+                outlined
+                dense
+                hide-details
+                placeholder="-----เลือกแพทย์-----"
+                :items="['-----เลือกแพทย์-----']"
+              ></v-select>
+            </v-col>
+            <v-col md="6" sm="12" cols="12">
+              <v-select
+                outlined
+                dense
+                hide-details
+                placeholder="----- ห้อง -----"
+                :items="['-----เลือกห้อง-----']"
+              ></v-select>
+            </v-col>
+            <v-col md="6" sm="12" cols="12">
+              <v-select
+                outlined
+                dense
+                hide-details
+                placeholder="----- เลือกหมายเหตุ -----"
+                :items="['-----เลือกหมายเหตุ-----']"
+              ></v-select>
+            </v-col> -->
+            <v-col md="12" sm="12" cols="12">
+              <v-textarea
+                outlined
+                dense
+                hide-details
+                label="หมายเหตุ"
+                rows="3"
+              ></v-textarea>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="dialogEdit = false">
+            Close
+          </v-btn>
+          <v-btn color="blue darken-1" text @click="dialogEdit = false">
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
+import Vmenu from "@/components/Vmenu";
 export default {
   name: "IndexPage",
+  components: {
+    Vmenu,
+  },
   data() {
     return {
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      dateStart: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-      menu: false,
+      dateEnd: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
       menuDailog: false,
       dialog: false,
+      dialogEdit: false,
       desserts: [
         {
           name: "Frozen Yogurt",
@@ -423,46 +567,43 @@ export default {
           .toISOString()
           .substr(0, 10),
       },
-      CoustomerOP:[
+      FormEdit: {
+        Date_nut: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+          .toISOString()
+          .substr(0, 10),
+      },
+      CoustomerOP: [
         {
           text: "Frozen Yogurt",
           value: 159,
-          
         },
         {
           text: "Ice cream sandwich",
           value: 237,
-        
         },
         {
           text: "Eclair",
           value: 262,
-        
         },
         {
           text: "Cupcake",
           value: 305,
-         
         },
         {
           text: "Gingerbread",
           value: 356,
-         
         },
         {
           text: "Jelly bean",
           value: 375,
-        
         },
         {
           text: "Lollipop",
           value: 392,
-          
         },
         {
           text: "Honeycomb",
           value: 408,
-     
         },
         {
           text: "Donut",
@@ -471,9 +612,8 @@ export default {
         {
           text: "KitKat",
           value: 518,
-        
         },
-      ]
+      ],
     };
   },
   methods: {
