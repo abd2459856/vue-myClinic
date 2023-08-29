@@ -5,16 +5,16 @@ import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
 import { createRouter } from './router.js'
 import NuxtChild from './components/nuxt-child.js'
-import NuxtError from '../layouts/error.vue'
+import NuxtError from '..\\layouts\\error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_ac72ebc8 from 'nuxt_plugin_plugin_ac72ebc8' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_plugin_6fc3615c from 'nuxt_plugin_plugin_6fc3615c' // Source: ./vuetify/plugin.js (mode: 'all')
-import nuxt_plugin_globals_23f2b60c from 'nuxt_plugin_globals_23f2b60c' // Source: ../plugins/globals (mode: 'all')
+import nuxt_plugin_plugin_97940d2e from 'nuxt_plugin_plugin_97940d2e' // Source: .\\components\\plugin.js (mode: 'all')
+import nuxt_plugin_plugin_419539aa from 'nuxt_plugin_plugin_419539aa' // Source: .\\vuetify\\plugin.js (mode: 'all')
+import nuxt_plugin_globals_23f2b60c from 'nuxt_plugin_globals_23f2b60c' // Source: ..\\plugins\\globals (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -180,12 +180,12 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_ac72ebc8 === 'function') {
-    await nuxt_plugin_plugin_ac72ebc8(app.context, inject)
+  if (typeof nuxt_plugin_plugin_97940d2e === 'function') {
+    await nuxt_plugin_plugin_97940d2e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_6fc3615c === 'function') {
-    await nuxt_plugin_plugin_6fc3615c(app.context, inject)
+  if (typeof nuxt_plugin_plugin_419539aa === 'function') {
+    await nuxt_plugin_plugin_419539aa(app.context, inject)
   }
 
   if (typeof nuxt_plugin_globals_23f2b60c === 'function') {

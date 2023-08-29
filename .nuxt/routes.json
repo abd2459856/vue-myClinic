@@ -2,22 +2,29 @@
   {
     "name": "cstomer",
     "path": "/cstomer",
-    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/cstomer/index.vue",
+    "component": "C:\\\\Users\\\\jmt\\\\Desktop\\\\New folder (2)\\\\vue-myClinic\\\\pages\\\\cstomer\\\\index.vue",
     "chunkName": "pages/cstomer/index",
-    "_name": "_5bda4dec"
+    "_name": "_bd9b63de"
   },
   {
     "name": "inspire",
     "path": "/inspire",
-    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/inspire.vue",
+    "component": "C:\\\\Users\\\\jmt\\\\Desktop\\\\New folder (2)\\\\vue-myClinic\\\\pages\\\\inspire.vue",
     "chunkName": "pages/inspire",
-    "_name": "_07966474"
+    "_name": "_b9ec98c8"
+  },
+  {
+    "name": "cstomer-Details",
+    "path": "/cstomer/Details",
+    "component": "C:\\\\Users\\\\jmt\\\\Desktop\\\\New folder (2)\\\\vue-myClinic\\\\pages\\\\cstomer\\\\Details.vue",
+    "chunkName": "pages/cstomer/Details",
+    "_name": "_12098cbe"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/index.vue",
+    "component": "C:\\\\Users\\\\jmt\\\\Desktop\\\\New folder (2)\\\\vue-myClinic\\\\pages\\\\index.vue",
     "chunkName": "pages/index",
-    "_name": "_00ac76ec"
+    "_name": "_1b797014"
   }
 ]

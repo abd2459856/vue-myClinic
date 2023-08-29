@@ -4,9 +4,10 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _5bda4dec = () => interopDefault(import('../pages/cstomer/index.vue' /* webpackChunkName: "pages/cstomer/index" */))
-const _07966474 = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _00ac76ec = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _bd9b63de = () => interopDefault(import('..\\pages\\cstomer\\index.vue' /* webpackChunkName: "pages/cstomer/index" */))
+const _b9ec98c8 = () => interopDefault(import('..\\pages\\inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _12098cbe = () => interopDefault(import('..\\pages\\cstomer\\Details.vue' /* webpackChunkName: "pages/cstomer/Details" */))
+const _1b797014 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -21,15 +22,19 @@ export const routerOptions = {
 
   routes: [{
     path: "/cstomer",
-    component: _5bda4dec,
+    component: _bd9b63de,
     name: "cstomer"
   }, {
     path: "/inspire",
-    component: _07966474,
+    component: _b9ec98c8,
     name: "inspire"
   }, {
+    path: "/cstomer/Details",
+    component: _12098cbe,
+    name: "cstomer-Details"
+  }, {
     path: "/",
-    component: _00ac76ec,
+    component: _1b797014,
     name: "index"
   }],
 
