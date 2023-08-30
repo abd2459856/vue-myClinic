@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-app-bar :clipped-left="clipped" fixed app color="white" >
+    <v-app-bar :clipped-left="clipped" fixed app color="white">
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <!-- <v-btn
         icon
@@ -39,7 +39,7 @@
         <v-icon>mdi-cog-outline</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-main>
+    <v-main style="background-color: rgb(234, 233, 226)">
       <v-container fluid>
         <Nuxt />
       </v-container>

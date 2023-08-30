@@ -7,6 +7,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _5bda4dec = () => interopDefault(import('../pages/cstomer/index.vue' /* webpackChunkName: "pages/cstomer/index" */))
 const _07966474 = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
 const _b0baa288 = () => interopDefault(import('../pages/cstomer/Details.vue' /* webpackChunkName: "pages/cstomer/Details" */))
+const _4ccad226 = () => interopDefault(import('../pages/cstomer/Details2.vue' /* webpackChunkName: "pages/cstomer/Details2" */))
 const _00ac76ec = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -15,7 +16,7 @@ Vue.use(Router)
 
 export const routerOptions = {
   mode: 'history',
-  base: '/',
+  base: '/myclinic/',
   linkActiveClass: 'nuxt-link-active',
   linkExactActiveClass: 'nuxt-link-exact-active',
   scrollBehavior,
@@ -32,6 +33,10 @@ export const routerOptions = {
     path: "/cstomer/Details",
     component: _b0baa288,
     name: "cstomer-Details"
+  }, {
+    path: "/cstomer/Details2",
+    component: _4ccad226,
+    name: "cstomer-Details2"
   }, {
     path: "/",
     component: _00ac76ec,

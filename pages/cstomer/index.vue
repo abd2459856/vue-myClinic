@@ -2,7 +2,7 @@
   <div>
     <v-card elevation="1" class="mt-3">
       <v-card-title>
-        <b><v-icon>mdi-calendar-month</v-icon> คนไข้</b>
+        <b><v-icon>mdi-account-tie</v-icon> คนไข้</b>
         <v-spacer />
         <div class="text-center">
           <v-btn text color="success" @click="dialog = true">
@@ -40,7 +40,7 @@
                   ลำดับ
                 </th>
                 <th style="background-color: #212121" class="text-center font-weight-bold white--text">
-                  บัตรประชาชน
+                  รหัสลูกค้า
                 </th>
                 <th style="background-color: #212121" class="text-center font-weight-bold white--text">
                   ชื่อเล่น
@@ -52,6 +52,7 @@
                   เบอร์โทรศัพท์
                 </th>
                 <th style="background-color: #212121" class="text-center font-weight-bold white--text">
+                  Action
                 </th>
               </tr>
             </thead>

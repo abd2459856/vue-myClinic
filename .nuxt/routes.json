@@ -21,6 +21,13 @@
     "_name": "_b0baa288"
   },
   {
+    "name": "cstomer-Details2",
+    "path": "/cstomer/Details2",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/cstomer/Details2.vue",
+    "chunkName": "pages/cstomer/Details2",
+    "_name": "_4ccad226"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/index.vue",
