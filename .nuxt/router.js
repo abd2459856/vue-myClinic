@@ -4,10 +4,13 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _5bda4dec = () => interopDefault(import('../pages/cstomer/index.vue' /* webpackChunkName: "pages/cstomer/index" */))
+const _28d57192 = () => interopDefault(import('../pages/customer/index.vue' /* webpackChunkName: "pages/customer/index" */))
+const _55bbd2b8 = () => interopDefault(import('../pages/doctor/index.vue' /* webpackChunkName: "pages/doctor/index" */))
 const _07966474 = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _b0baa288 = () => interopDefault(import('../pages/cstomer/Details.vue' /* webpackChunkName: "pages/cstomer/Details" */))
-const _4ccad226 = () => interopDefault(import('../pages/cstomer/Details2.vue' /* webpackChunkName: "pages/cstomer/Details2" */))
+const _fe3b087a = () => interopDefault(import('../pages/profile.vue' /* webpackChunkName: "pages/profile" */))
+const _34848147 = () => interopDefault(import('../pages/customer/Details.vue' /* webpackChunkName: "pages/customer/Details" */))
+const _5257fcdb = () => interopDefault(import('../pages/customer/details2.vue' /* webpackChunkName: "pages/customer/details2" */))
+const _8f7be5a4 = () => interopDefault(import('../pages/customer/Profile.vue' /* webpackChunkName: "pages/customer/Profile" */))
 const _00ac76ec = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -22,21 +25,33 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/cstomer",
-    component: _5bda4dec,
-    name: "cstomer"
+    path: "/customer",
+    component: _28d57192,
+    name: "customer"
+  }, {
+    path: "/doctor",
+    component: _55bbd2b8,
+    name: "doctor"
   }, {
     path: "/inspire",
     component: _07966474,
     name: "inspire"
   }, {
-    path: "/cstomer/Details",
-    component: _b0baa288,
-    name: "cstomer-Details"
+    path: "/profile",
+    component: _fe3b087a,
+    name: "profile"
   }, {
-    path: "/cstomer/Details2",
-    component: _4ccad226,
-    name: "cstomer-Details2"
+    path: "/customer/Details",
+    component: _34848147,
+    name: "customer-Details"
+  }, {
+    path: "/customer/details2",
+    component: _5257fcdb,
+    name: "customer-details2"
+  }, {
+    path: "/customer/Profile",
+    component: _8f7be5a4,
+    name: "customer-Profile"
   }, {
     path: "/",
     component: _00ac76ec,

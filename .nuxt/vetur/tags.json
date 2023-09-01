@@ -10,5 +10,11 @@
   },
   "VuetifyLogo": {
     "description": "Auto imported from components/VuetifyLogo.vue"
+  },
+  "CustomerDetailCus": {
+    "description": "Auto imported from components/Customer/Detail_cus.vue"
+  },
+  "CustomerTreatment": {
+    "description": "Auto imported from components/Customer/Treatment.vue"
   }
 }

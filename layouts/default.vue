@@ -27,11 +27,11 @@
         <v-icon>mdi-calendar-month</v-icon>
         วันนี้
       </v-btn>
-      <v-btn to="/cstomer/" text color="deep-orange">
+      <v-btn to="/customer/" text color="deep-orange">
         <v-icon>mdi-account-tie</v-icon>
         คนไข้
       </v-btn>
-      <v-btn text color="deep-orange">
+      <v-btn to="/doctor/" text color="deep-orange">
         <v-icon>mdi-doctor</v-icon>
         แพทย์
       </v-btn>

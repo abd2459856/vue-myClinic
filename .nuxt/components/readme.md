@@ -10,3 +10,5 @@ You can directly use them in pages and other components without the need to impo
 - `<Tutorial>` | `<tutorial>` (components/Tutorial.vue)
 - `<Vmenu>` | `<vmenu>` (components/Vmenu.vue)
 - `<VuetifyLogo>` | `<vuetify-logo>` (components/VuetifyLogo.vue)
+- `<CustomerDetailCus>` | `<customer-detail-cus>` (components/Customer/Detail_cus.vue)
+- `<CustomerTreatment>` | `<customer-treatment>` (components/Customer/Treatment.vue)

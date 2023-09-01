@@ -1,10 +1,17 @@
 [
   {
-    "name": "cstomer",
-    "path": "/cstomer",
-    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/cstomer/index.vue",
-    "chunkName": "pages/cstomer/index",
-    "_name": "_5bda4dec"
+    "name": "customer",
+    "path": "/customer",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/customer/index.vue",
+    "chunkName": "pages/customer/index",
+    "_name": "_28d57192"
+  },
+  {
+    "name": "doctor",
+    "path": "/doctor",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/doctor/index.vue",
+    "chunkName": "pages/doctor/index",
+    "_name": "_55bbd2b8"
   },
   {
     "name": "inspire",
@@ -14,18 +21,32 @@
     "_name": "_07966474"
   },
   {
-    "name": "cstomer-Details",
-    "path": "/cstomer/Details",
-    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/cstomer/Details.vue",
-    "chunkName": "pages/cstomer/Details",
-    "_name": "_b0baa288"
+    "name": "profile",
+    "path": "/profile",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/profile.vue",
+    "chunkName": "pages/profile",
+    "_name": "_fe3b087a"
   },
   {
-    "name": "cstomer-Details2",
-    "path": "/cstomer/Details2",
-    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/cstomer/Details2.vue",
-    "chunkName": "pages/cstomer/Details2",
-    "_name": "_4ccad226"
+    "name": "customer-Details",
+    "path": "/customer/Details",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/customer/Details.vue",
+    "chunkName": "pages/customer/Details",
+    "_name": "_34848147"
+  },
+  {
+    "name": "customer-details2",
+    "path": "/customer/details2",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/customer/details2.vue",
+    "chunkName": "pages/customer/details2",
+    "_name": "_5257fcdb"
+  },
+  {
+    "name": "customer-Profile",
+    "path": "/customer/Profile",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/customer/Profile.vue",
+    "chunkName": "pages/customer/Profile",
+    "_name": "_8f7be5a4"
   },
   {
     "name": "index",
