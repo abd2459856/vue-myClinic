@@ -199,7 +199,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: app.router.options.base,
-      env: {}
+      env: {"api_url":"http://localhost/api-myclinic/index.php"}
     }
     // Only set once
 

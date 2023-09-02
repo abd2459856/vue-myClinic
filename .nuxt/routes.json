@@ -1,5 +1,12 @@
 [
   {
+    "name": "calendar",
+    "path": "/calendar",
+    "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/calendar/index.vue",
+    "chunkName": "pages/calendar/index",
+    "_name": "_678fead2"
+  },
+  {
     "name": "customer",
     "path": "/customer",
     "component": "/Users/muhammadabideen.w/vue/vue-myClinic/pages/customer/index.vue",

@@ -88,7 +88,7 @@
               <tr v-for="(r, i) in get_loadtable" :key="i">
                 <td class="text-center" nowrap="">{{ r.row }}</td>
                 <td nowrap="" class="text-left">{{ r.IDCard }}</td>
-                <td nowrap="" class="text-left">{{ r.Nicknname }}</td>
+                <td nowrap="" class="text-left">{{ r.Nickname }}</td>
                 <td nowrap="" class="text-left">
                   <v-avatar size="30">
                     <img
@@ -96,9 +96,9 @@
                       alt="John"
                     />
                   </v-avatar>
-                  <span class="pl-3">{{ r.Name }}</span>
+                  <span class="pl-3">{{ r.Fisrtname }}&nbsp;{{ r.Lastname }}</span>
                 </td>
-                <td nowrap="" class="text-left">{{ r.Phone }}</td>
+                <td nowrap="" class="text-left">{{ r.tell }}</td>
                 <td nowrap="" class="text-center">
                   <v-btn
                     elevation="0"
@@ -164,7 +164,7 @@ export default {
         address_district: "",
         address_province: "",
         postal: "",
-        tell: "",
+        tell: "0093999948",
         email: "",
         profile: "",
       },
